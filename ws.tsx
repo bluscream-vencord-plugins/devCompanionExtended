@@ -1,9 +1,3 @@
-/*
- * Vencord, a Discord client mod
- * Copyright (c) 2025 Vendicated and contributors
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 import { Settings } from "@api/Settings";
 import { getIntlMessageFromHash } from "@utils/discord";
 import { runtimeHashMessageKey } from "@utils/intlHash";

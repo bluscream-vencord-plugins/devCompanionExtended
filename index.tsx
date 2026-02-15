@@ -1,9 +1,3 @@
-/*
- * Vencord, a Discord client mod
- * Copyright (c) 2025 Vendicated and contributors
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 import { definePluginSettings } from "@api/Settings";
 import { EquicordDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -13,9 +7,14 @@ import { initWs, sockets, startMcpIpcBridge, stopMcpIpcBridge, stopWs } from "./
 
 export const DEFAULT_PORT = 8487;
 
-const pluginId = "devCompanionExtended";
-const pluginName = "Dev Companion Extended";
-export const logger = new Logger(pluginName, "#7289da");
+export const pluginInfo = {
+    id: "devCompanionExtended",
+    name: "Dev Companion Extended",
+    description: "Hosts a MCP server to be able to control discord via AI",
+    color: "#7289da"
+};
+
+export const logger = new Logger(pluginInfo.name, pluginInfo.color);
 
 const Native = VencordNative.pluginHelpers.devcompanionExtended as PluginNative<typeof import("./native")>;
 
@@ -126,8 +125,8 @@ export const settings = definePluginSettings({
 });
 
 export default definePlugin({
-    name: pluginName,
-    description: pluginName,
+    name: "Dev Companion Extended",
+    description: "Hosts a MCP server to be able to control discord via AI",
     authors: [EquicordDevs.prism, EquicordDevs.justjxke],
 
     settings,
