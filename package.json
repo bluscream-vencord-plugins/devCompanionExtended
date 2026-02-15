@@ -1,0 +1,15 @@
+{
+    "name": "devCompanionExtended",
+    "version": "1.0.0",
+    "description": "Dev Companion Extended",
+    "main": "index.tsx",
+    "author": {
+        "name": "Bluscream",
+        "url": "https://github.com/Bluscream"
+    },
+    "license": "GPL-3.0-or-later",
+    "vencord": {
+        "plugin": true,
+        "userPlugin": true
+    }
+}
