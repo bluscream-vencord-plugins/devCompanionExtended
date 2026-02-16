@@ -30,7 +30,7 @@ export const DEFAULT_PORT = 8487;
 
 // region Definition
 export default definePlugin({
-    name: pluginInfo.name,
+    name: "DevCompanionExtended",
     description: pluginInfo.description,
     authors: pluginInfo.authors,
 

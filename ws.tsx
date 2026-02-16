@@ -8,7 +8,8 @@ import * as Common from "@webpack/common";
 import { Constants, FluxDispatcher, RestAPI, Toasts } from "@webpack/common";
 import { WebpackPatcher } from "Vencord";
 
-import { DEFAULT_PORT, logger, settings } from ".";
+import { DEFAULT_PORT, logger } from ".";
+import { settings } from "./settings";
 import { getMcpTools } from "./mcpTools";
 
 const { getFactoryPatchedBy, getFactoryPatchedSource } = WebpackPatcher;
