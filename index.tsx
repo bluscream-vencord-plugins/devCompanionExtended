@@ -1,133 +1,38 @@
-import { definePluginSettings } from "@api/Settings";
+//// Plugin originally written for Equicord at 2026-02-16 by https://github.com/Bluscream, https://antigravity.google
+// region Imports
 import { EquicordDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
-import definePlugin, { OptionType, PluginNative } from "@utils/types";
+import definePlugin, { PluginNative } from "@utils/types";
 
 import { initWs, sockets, startMcpIpcBridge, stopMcpIpcBridge, stopWs } from "./ws";
+import { settings } from "./settings";
+// endregion Imports
 
-export const DEFAULT_PORT = 8487;
-
+// region PluginInfo
 export const pluginInfo = {
     id: "devCompanionExtended",
     name: "Dev Companion Extended",
-    description: "Hosts a MCP server to be able to control discord via AI",
-    color: "#7289da"
+    description: "Hosts an MCP server allowing AI to control Discord via external tools",
+    color: "#7289da",
+    authors: [
+        EquicordDevs.prism,
+        EquicordDevs.justjxke,
+        { name: "Assistant", id: 0n }
+    ],
 };
+// endregion PluginInfo
 
-export const logger = new Logger(pluginInfo.name, pluginInfo.color);
-
+// region Variables
+export const logger = new Logger(pluginInfo.id, pluginInfo.color);
 const Native = VencordNative.pluginHelpers.devcompanionExtended as PluginNative<typeof import("./native")>;
+export const DEFAULT_PORT = 8487;
+// endregion Variables
 
-export const settings = definePluginSettings({
-    notifyOnConnect: {
-        description: "Show notification when MCP server connects",
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    allowReload: {
-        description: "Allow MCP server to reload Discord",
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    allowPluginToggle: {
-        description: "Allow MCP server to enable/disable plugins",
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    debugMode: {
-        description: "Enable debug logging",
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    ports: {
-        description: "Comma/space-separated MCP ports or ranges (leave empty to auto-detect)",
-        type: OptionType.STRING,
-        default: ""
-    },
-    maxReconnectAttempts: {
-        description: "How many times to retry a port before giving up (manual reconnect resets)",
-        type: OptionType.NUMBER,
-        default: 5,
-        onChange: value => Math.max(1, Math.min(20, value || 5))
-    },
-    scanSpread: {
-        description: "When ports are empty, scan this many ports below/above the default",
-        type: OptionType.NUMBER,
-        default: 2,
-        onChange: value => Math.max(0, Math.min(20, value || 2))
-    },
-    enableIpcServer: {
-        description: "Host an in-app MCP HTTP server via IPC (fast path)",
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true
-    },
-    enableWebSocketFallback: {
-        description: "Fallback to external MCP server (WebSocket) if IPC server fails",
-        type: OptionType.BOOLEAN,
-        default: false
-    },
-    ipcPort: {
-        description: "Port for the in-app MCP HTTP server (0 = auto)",
-        type: OptionType.NUMBER,
-        default: 8486,
-        onChange: value => Math.max(0, Math.min(65535, value ?? 8486))
-    },
-    cacheEnabled: {
-        description: "Enable response caching for safe MCP tools",
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    cacheTtlMs: {
-        description: "Default cache TTL in ms for safe MCP tools",
-        type: OptionType.NUMBER,
-        default: 10000,
-        onChange: value => Math.max(0, Math.min(300000, value ?? 10000))
-    },
-    cacheMaxEntries: {
-        description: "Maximum cached responses to keep",
-        type: OptionType.NUMBER,
-        default: 300,
-        onChange: value => Math.max(50, Math.min(2000, value ?? 300))
-    },
-    prebuildSearchIndex: {
-        description: "Prebuild a module token index to speed up literal searches",
-        type: OptionType.BOOLEAN,
-        default: false
-    },
-    prebuildPatchIndex: {
-        description: "Prebuild a patch index to speed up patch analysis",
-        type: OptionType.BOOLEAN,
-        default: false
-    },
-    prewarmStoreCache: {
-        description: "Prewarm store cache at startup to speed up store listing",
-        type: OptionType.BOOLEAN,
-        default: false
-    },
-    prewarmSearchQueries: {
-        description: "Comma/space-separated literal search queries to prewarm on startup",
-        type: OptionType.STRING,
-        default: ""
-    },
-    ipcReadyTimeoutMs: {
-        description: "How long to wait for IPC server readiness after reload (ms)",
-        type: OptionType.NUMBER,
-        default: 12000,
-        onChange: value => Math.max(1000, Math.min(60000, value ?? 12000))
-    },
-    ipcReadyIntervalMs: {
-        description: "Polling interval while waiting for IPC readiness (ms)",
-        type: OptionType.NUMBER,
-        default: 300,
-        onChange: value => Math.max(100, Math.min(5000, value ?? 300))
-    }
-});
-
+// region Definition
 export default definePlugin({
-    name: "Dev Companion Extended",
-    description: "Hosts a MCP server to be able to control discord via AI",
-    authors: [EquicordDevs.prism, EquicordDevs.justjxke],
+    name: pluginInfo.id,
+    description: pluginInfo.description,
+    authors: pluginInfo.authors,
 
     settings,
 
@@ -216,3 +121,4 @@ export default definePlugin({
         }
     }
 });
+// endregion Definition
