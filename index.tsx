@@ -8,19 +8,8 @@ import { initWs, sockets, startMcpIpcBridge, stopMcpIpcBridge, stopWs } from "./
 import { settings } from "./settings";
 // endregion Imports
 
-// region PluginInfo
-export const pluginInfo = {
-    id: "devCompanionExtended",
-    name: "DevCompanionExtended",
-    description: "Hosts an MCP server allowing AI to control Discord via external tools",
-    color: "#7289da",
-    authors: [
-        EquicordDevs.prism,
-        EquicordDevs.justjxke,
-        { name: "Assistant", id: 0n }
-    ],
-};
-// endregion PluginInfo
+import { pluginInfo } from "./info";
+export { pluginInfo };
 
 // region Variables
 export const logger = new Logger(pluginInfo.id, pluginInfo.color);
@@ -30,7 +19,7 @@ export const DEFAULT_PORT = 8487;
 
 // region Definition
 export default definePlugin({
-    name: "DevCompanionExtended",
+    name: "DevCompanionExtended", // needs to be const string for native modules regex parsing
     description: pluginInfo.description,
     authors: pluginInfo.authors,
 
