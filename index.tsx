@@ -11,7 +11,7 @@ import { settings } from "./settings";
 // region PluginInfo
 export const pluginInfo = {
     id: "devCompanionExtended",
-    name: "Dev Companion Extended",
+    name: "DevCompanionExtended",
     description: "Hosts an MCP server allowing AI to control Discord via external tools",
     color: "#7289da",
     authors: [
@@ -30,7 +30,7 @@ export const DEFAULT_PORT = 8487;
 
 // region Definition
 export default definePlugin({
-    name: pluginInfo.id,
+    name: pluginInfo.name,
     description: pluginInfo.description,
     authors: pluginInfo.authors,
 
