@@ -1,3 +1,9 @@
+/*
+ * Vencord, a Discord client mod
+ * Copyright (c) 2025 Vendicated and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { randomUUID } from "crypto";
 import { BrowserWindow } from "electron";
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
